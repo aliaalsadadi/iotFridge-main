@@ -30,7 +30,7 @@ function getHighestNumberedFile(directoryPath) {
 
 async function get_image(image_name, folder) {
     try {
-        let url = 'http://192.168.100.200/capture';
+        let url = 'https://f326-193-188-123-42.ngrok-free.app/capture';
         const response = await axios.get(url, { responseType: 'arraybuffer' });
         fs.writeFileSync(`images/${folder}/${image_name}.jpg`, Buffer.from(response.data, 'binary'));
     } catch (error) {

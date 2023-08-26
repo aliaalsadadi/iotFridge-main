@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 function
     train() {
-    const pythonScriptPath = 'C:\\Users\\HP\\PycharmProjects\\pythonProject1\\yolo\\resume.py';
+    const pythonScriptPath = 'resume.py';
     const pythonScript = spawn('python', [pythonScriptPath]);
 
     pythonScript.stdout.on('data', (data) => {

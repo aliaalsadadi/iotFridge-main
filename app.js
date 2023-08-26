@@ -27,7 +27,7 @@ app.post('/upload', (req, res) => {
     res.send('training');
 });
 app.get('/upload', function (req, res) {
-    const pythonProcess = spawn('python', ['C:\\Users\\HP\\PycharmProjects\\pythonProject1\\yolo\\cvat.py']);
+    const pythonProcess = spawn('python', ['cvat.py']);
     pythonProcess.on('close', (code) => {
         if (code === 0) {
             res.redirect('/train');
@@ -46,12 +46,12 @@ app.get('/upload', function (req, res) {
 app.get("/train", (req, res) => {
     res.sendFile(path.join(__dirname, './train.html'));
 });
-app.post("/train", async (res, req) => {
+app.post("/train", async (req, res) => {
     await train();
     res.redirect('/');
 });
 app.get('/get-fridge', (req, res) => {
-    let url = 'http://192.168.100.200/capture';
+    let url = 'https://f326-193-188-123-42.ngrok-free.app/capture';
     axios.get(url, { responseType: 'arraybuffer' })
         .then(response => {
             fs.writeFileSync(`try.jpg`, Buffer.from(response.data, 'binary'));
@@ -73,5 +73,5 @@ app.get('/get-fridge', (req, res) => {
             res.status(500).send('An error occurred');
         });
 })
-var port = 80
+var port = 8000;
 app.listen(port, () => console.log(`Server listening on port ${port}`));

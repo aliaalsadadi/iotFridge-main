@@ -1,18 +1,18 @@
 from http import HTTPStatus
 from zipfile import ZipFile
-
-from cvat_sdk.api_client import Configuration,ApiClient,models,exceptions
+from cvat_sdk.api_client import Configuration, ApiClient, models, exceptions
 from time import sleep
 import os
 classes = []
-labels=[]
-with open(r"C:\Users\HP\PycharmProjects\pythonProject1\yolo\classes.txt", 'rb') as file:
+labels = []
+with open("classes.txt", 'rb') as file:
     classes = file.readlines()
 for label in classes:
-    labels.append({"name" : label.decode().strip('\n')})
-images =[]
+    labels.append({"name": label.decode().strip('\n')})
+print(labels)
+images = []
 for file in os.listdir("images/train"):
-    images.append(os.path.join('images/train/',file))
+    images.append(os.path.join('images/train/', file))
 
 configuration = Configuration(
     host="http://localhost:8080/",
@@ -23,29 +23,26 @@ client_files = []
 for img in images:
     client_files.append(open(img, 'rb'))
 with ApiClient(configuration) as api_client:
-    task_spec = {
-        'name': 'train',
-        "labels": labels,
-    }
+    task_spec = models.TaskWriteRequest(name="train", labels=labels)
     try:
         (task, response) = api_client.tasks_api.create(task_spec)
     except exceptions.ApiException as e:
         print("Exception when trying to create a task: %s\n" % e)
     task_data = models.DataRequest(
         image_quality=70,
-        client_files= client_files
+        client_files=client_files
     )
     (_, response) = api_client.tasks_api.create_data(task.id,
-        data_request=task_data,
-        _content_type="multipart/form-data",
-        _check_status=False, _parse_response=False
-    )
+                                                     data_request=task_data,
+                                                     _content_type="multipart/form-data",
+                                                     _check_status=False, _parse_response=False
+                                                     )
     (data, response) = api_client.jobs_api.list()
-    print('task',task.id)
+    stage = "annotation"
     for result in data.results:
-        print(result.task_id)
         if result.task_id == task.id:
-            stage=result.stage
+            print(result.stage)
+            stage = result.stage
     while stage != "acceptance":
         with ApiClient(configuration) as api_client:
             (data, response) = api_client.jobs_api.list()
@@ -86,18 +83,17 @@ with ApiClient(configuration) as api_client:
     except exceptions.ApiException as e:
         print("Exception when calling TasksApi.destroy(): %s\n" % e)
 with ZipFile('output_file.zip', 'r') as zip:
-
-
     zip.extractall()
     for file in os.listdir("obj_train_data"):
         if file.endswith(".txt"):
-            with open("labels/train/" + file, 'w') as f:
-                f.write(file)
+            with open(f"obj_train_data/{file}", 'r') as file_data:
+                with open("labels/train/" + file, 'w') as f_train:
+                    f_train.write(file_data.read())
+                with open("labels/val/" + file, 'w') as f_val:
+                    f_val.write(file_data.read())
         os.remove("obj_train_data/" + file)
     os.remove("obj.data")
     os.remove("obj.names")
     os.rmdir("obj_train_data")
     os.remove("train.txt")
 os.remove("output_file.zip")
-
-
