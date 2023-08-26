@@ -46,8 +46,8 @@ app.get('/upload', function (req, res) {
 app.get("/train", (req, res) => {
     res.sendFile(path.join(__dirname, './train.html'));
 });
-app.post("/train", async (req, res) => {
-    await train();
+app.post("/train", (req, res) => {
+    train();
     res.redirect('/');
 });
 app.get('/get-fridge', (req, res) => {

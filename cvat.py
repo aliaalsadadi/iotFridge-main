@@ -15,7 +15,7 @@ for file in os.listdir("images/train"):
     images.append(os.path.join('images/train/', file))
 
 configuration = Configuration(
-    host="http://localhost:8080/",
+    host="http://hum-home.duckdns.org:8080/",
     username='ali',
     password='alooi999',
 )
