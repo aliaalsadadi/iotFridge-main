@@ -1,0 +1,50 @@
+{% extends "layout.njk" %}
+{% block title %}Groceries{% endblock %}
+{% block css %} 
+<link rel="stylesheet" type="text/css" href="/css/grocery.css"> 
+{% endblock%}
+{% block google %}     <link
+
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+
+    />
+{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+{% endblock%}
+{% block navbar %}
+    <nav id="navbar" style="position: fixed; top:10px; width: 100%;">
+      <div class="heading">
+        <h4>IoT Fridge</h4>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recipes">Recipe</a></li>
+        <li><a href="/get-fridge">fridge</a></li>
+        <li><a href="/grocery">Grocery</a></li>
+      </ul>
+    </nav>
+{% endblock%}
+{% block main %}
+<div id="wrapper" style="position: relative; top: 50px; background-image: url('/css/fruits.jpg'); background-size: cover;">
+    <h1>List of groceries</h1>
+    <table id="keywords" cellspacing="0" cellpadding="0" style="position: relative; top: 10px">
+        <thead>
+            <tr>
+                <th style="display: none"><span>ID</span></th>
+                <th><span>Items</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grocery in groceries %}
+                <tr>
+                    <td style="color: black; font-size: 25px;  background-color: rgba(256, 256, 256, 0.3);"> <strong>{{ grocery }}</strong> </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock%}

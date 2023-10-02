@@ -1,0 +1,53 @@
+{% extends "layout.njk" %}
+{% block title %}Home{% endblock %}
+{% block google %}     <link
+
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+
+    />
+{% endblock %}
+{% block css %} 
+  <link rel="stylesheet" type="text/css" href="/css/home.css">
+{% endblock%}
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+{% endblock%}
+{% block navbar %}
+    <nav id="navbar" style="position: fixed; top:10px; width: 100%;">
+      <div class="heading">
+        <h4>IoT Fridge</h4>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recipes">Recipe</a></li>
+        <li><a href="/get-fridge">fridge</a></li>
+        <li><a href="/grocery">Grocery</a></li>
+      </ul>
+    </nav>
+{% endblock%}
+{% block main %}
+<div class="grid-container">
+  <div class="grid-item grid-item-1">
+    <h3><strong>Last Opening</strong></h3>
+    <p id="last-opening-time">{{ last_open[0]}}-{{ last_open[1]}}<br>{{last_open[2]}}</p>
+  </div>
+  <div class="grid-item grid-item-2">
+    <h3><strong>Yesterday</strong></h3>
+    <p id="yesterday-count">{{ yesterday }}</p>
+  </div>
+  <div class="grid-item grid-item-3">
+    <h3><strong>Today</strong></h3>
+    <p id="today-count"> {{weekday}}<br>{{today}}</p>
+  </div>
+  <div class="grid-item grid-item-4">
+    <h3><strong>This Month</strong></h3>
+    <p id="this-month-count">{{monthName}}<br>{{thisMonth}}</p>
+  </div>
+  <div class="grid-item grid-item-5">
+    <h3><strong>Last Month</strong></h3>
+    <p id="last-month-count">{{lastMonthName}}<br>{{last_month}}</p>
+  </div>
+</div>
+{% endblock %}

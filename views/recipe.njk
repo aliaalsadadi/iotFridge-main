@@ -1,0 +1,48 @@
+{% extends "layout.njk" %}
+{% block title %}Recipes{% endblock %}
+{% block css %} <link rel="stylesheet" type="text/css" href="/css/recipe.css"> {% endblock %}
+{% block google %}     <link
+
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+
+    />
+{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+{% endblock%}
+{% block navbar %}
+    <nav id="navbar" style="position: fixed; top:10px; width: 100%;">
+      <div class="heading">
+        <h4>IoT Fridge</h4>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recipes">Recipe</a></li>
+        <li><a href="/get-fridge">fridge</a></li>
+        <li><a href="/grocery">Grocery</a></li>
+      </ul>
+    </nav>
+{% endblock%}
+{% block main %}
+    {% if meals|length != 0%}
+        <div class="grid-container">
+            {% for meal in meals %}
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src={{ meal.strMealThumb }} alt="Avatar" style="width:300px;height:200px;">
+                        </div>
+                        <div class="flip-card-back">
+                            <h1>{{ meal.strMeal }}</h1>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1> no recipes found </h1>
+    {% endif %}
+{% endblock %}

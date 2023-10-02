@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="settings.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block google %}{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/css/nav.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/learn.css">
+    <link rel="stylesheet" type="text/css" href="/css/train.css">
+    <link rel="stylesheet" type="text/css" href="/css/result.css">
+    {% block script %} {% endblock%}
+    {% block css %} {% endblock%}
+    {% block style %} {% endblock%}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    {% block navbar%}{% endblock %}
+    <main class="container-fluid py-5 text-center">
+        {% block main %}{% endblock %}
+    </main>
+</body>
+
+</html>

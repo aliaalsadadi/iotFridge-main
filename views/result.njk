@@ -1,0 +1,47 @@
+{% extends "layout.njk" %}
+{% block title %} Items {% endblock %}
+{% block google %}     <link
+
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+
+    />
+{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+{% endblock%}
+{% block navbar %}
+    <nav id="navbar" style="position: fixed; top:10px; width: 100%;">
+      <div class="heading">
+        <h4>IoT Fridge</h4>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recipes">Recipe</a></li>
+        <li><a href="/get-fridge">fridge</a></li>
+        <li><a href="/grocery">Grocery</a></li>
+      </ul>
+    </nav>
+{% endblock%}
+{% block main %} 
+    <div id="wrapper">
+        <h1>Goodies in my fridge</h1>
+        <table id="keywords" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th><span>Items</span></th>
+                <th><span>quantity</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr class="goodies">
+                    <td class="lalign" style="border: 1px solid aqua">{{ item[0] }}</td>
+                    <td style="border: 1px solid aqua">{{ item[1] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.njk" %}
+
+{% block title %}
+learn
+{% endblock %}
+
+{% block google %}     <link
+
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+
+    />
+{% endblock %}
+
+{% block style %} 
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+{% endblock%}
+{% block navbar %}
+    <nav id="navbar" style="position: fixed; top:10px; width: 100%;">
+      <div class="heading">
+        <h4>IoT Fridge</h4>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/recipes">Recipe</a></li>
+        <li><a href="/get-fridge">fridge</a></li>
+        <li><a href="/grocery">Grocery</a></li>
+      </ul>
+    </nav>
+{% endblock%}
+{% block main %}
+  <form action="/learn" method="post">
+    <div class="subscribe">
+      <h2 class="subscribe__title">make sure nothing is moving in the <strong>FRIDGE</strong></h2>
+      <div class="form">
+        <input type="text" class="form__email" name="new_class" placeholder="New object's name" />
+        <button class="form__button" type="submit" name="submit" id="submit">Confirm</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}
